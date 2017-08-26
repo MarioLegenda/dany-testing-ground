@@ -1,3 +1,4 @@
 dany:
     resources:
-        model: AppBundle\Entity\Category
+        app.category:
+            model: AppBundle\Entity\Category
