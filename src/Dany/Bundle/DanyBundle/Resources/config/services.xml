@@ -10,6 +10,7 @@
     </imports>
 
     <services>
-
+        <service id="dany.flow_machine" synthetic="true" />
+        <service id="dany.configuration_collection" synthetic="true" />
     </services>
 </container>

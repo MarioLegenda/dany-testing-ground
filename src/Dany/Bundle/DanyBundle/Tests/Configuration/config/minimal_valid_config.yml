@@ -1,0 +1,7 @@
+dany:
+    resources:
+        app.category:
+            model: AppBundle\Entity\Category
+
+        app.word:
+            model: AppBundle\Entity\Word

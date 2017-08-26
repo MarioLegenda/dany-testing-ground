@@ -2,7 +2,9 @@
 
 namespace Dany\Bundle\DanyBundle\DependencyInjection;
 
+use Dany\Bundle\DanyBundle\Configuration\ResourceConfigurationBuilder;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\HttpKernel\DependencyInjection\Extension;
 use Symfony\Component\DependencyInjection\Loader;
@@ -27,17 +29,17 @@ class DanyExtension extends Extension
         $loader = new Loader\XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
 
         $loader->load('services.xml');
+
+        $this->addConfigurationToContainer($container, $config['resources']);
     }
 
-    private function validateResources($resources, ContainerBuilder $container)
+    private function validateResources($resources, ContainerInterface $container)
     {
         foreach ($resources as $resourceName => $resource) {
-            if (!array_key_exists('model', $resource) and
-                !array_key_exists('models', $resource))
-            {
+            if (empty($resource['model']) and empty($resource['models'])) {
                 throw new \RuntimeException(
                     sprintf(
-                        'Invalid dany resource configuration. A dany resource should have one of \'model\' of \'models\' options'
+                        'Invalid dany resource configuration. A dany resource should have one of \'model\' or \'models\' options'
                     )
                 );
             }
@@ -47,7 +49,7 @@ class DanyExtension extends Extension
         }
     }
 
-    private function validateListeners(array $resource, ContainerBuilder $container)
+    private function validateListeners(array $resource, ContainerInterface $container)
     {
         if (array_key_exists('listeners', $resource)) {
             $listeners = $resource['listeners'];
@@ -66,7 +68,7 @@ class DanyExtension extends Extension
         }
     }
 
-    private function validateFlow(array $resource, ContainerBuilder $container)
+    private function validateFlow(array $resource, ContainerInterface $container)
     {
         if (array_key_exists('flow', $resource)) {
             $flows = $resource['flow'];
@@ -82,5 +84,14 @@ class DanyExtension extends Extension
                 }
             }
         }
+    }
+
+    private function addConfigurationToContainer(
+        ContainerInterface $container,
+        array $resources
+    ) {
+        $configFactory = new ResourceConfigurationBuilder($resources);
+
+        $container->set('dany.resource_collection', $configFactory->buildConfiguration());
     }
 }

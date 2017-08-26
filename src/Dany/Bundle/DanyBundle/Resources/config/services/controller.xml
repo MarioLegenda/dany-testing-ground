@@ -9,7 +9,7 @@
     </parameters>
 
     <services>
-        <service id="dany.flow_machine_controller" class="%dany.controller.flow_machine_controller.class%">
+        <service id="dany.flow_machine_controller" class="%dany.controller.flow_machine_controller.class%" public="false">
         </service>
     </services>
 </container>

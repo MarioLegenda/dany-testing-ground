@@ -6,7 +6,7 @@
         "psr-4": {
             "AppBundle\\": "src/AppBundle",
             "Dany\\Bundle\\": "src/Dany/Bundle/",
-            "Dany\\Library\\": "src/Bundle/Library"
+            "Dany\\Library\\": "src/Dany/Library"
         },
         "classmap": [
             "app/AppKernel.php",
