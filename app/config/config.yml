@@ -67,3 +67,20 @@ swiftmailer:
     username: '%mailer_user%'
     password: '%mailer_password%'
     spool: { type: memory }
+
+dany:
+     resources:
+         app.category:
+             # controller: AppBundle\Controller\CategoryController
+             # model: AppBundle\Entity\Category
+             models:
+                 - AppBundle\Entity\Category
+                 - AppBundle\Entity\Menu
+             response_headers:
+                 'SOME-HEADER': 'header-value'
+             listeners:
+                 pre_flow: some.listener
+                 post_flow: some.listener
+             flow:
+                 - flow.service.1
+                 - flow.service.2

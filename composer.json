@@ -4,7 +4,9 @@
     "type": "project",
     "autoload": {
         "psr-4": {
-            "AppBundle\\": "src/AppBundle"
+            "AppBundle\\": "src/AppBundle",
+            "Dany\\Bundle\\": "src/Dany/Bundle/",
+            "Dany\\Library\\": "src/Bundle/Library"
         },
         "classmap": [
             "app/AppKernel.php",
@@ -33,6 +35,7 @@
         "twig/twig": "^1.0||^2.0"
     },
     "require-dev": {
+        "phpunit/phpunit": "^6.2",
         "sensio/generator-bundle": "^3.0",
         "symfony/phpunit-bridge": "^3.0"
     },

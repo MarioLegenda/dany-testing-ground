@@ -1,0 +1,3 @@
+dany:
+    resources:
+        model: AppBundle\Entity\Category
