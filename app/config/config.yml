@@ -71,12 +71,10 @@ swiftmailer:
 dany:
     resources:
         app.category:
-            #model: AppBundle\Entity\Category
-            models:
-                - AppBundle\Entity\Category
-                - AppBundle\Entity\Menu
-            response_headers:
-                'SOME-HEADER': 'header-value'
+            model: AppBundle\Entity\Category
+            #models:
+             #   - AppBundle\Entity\Category
+             #   - AppBundle\Entity\Menu
             listeners:
                 pre_flow: some.listener
                 post_flow: some.listener

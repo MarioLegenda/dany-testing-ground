@@ -32,7 +32,6 @@ class Configuration implements ConfigurationInterface
                         ->children()
                             ->scalarNode('model')->defaultNull()->end()
                             ->arrayNode('models')->prototype('scalar')->defaultNull()->end()->end()
-                            ->arrayNode('response_headers')->prototype('scalar')->defaultNull()->end()->end()
                             ->arrayNode('listeners')
                                 ->children()
                                     ->scalarNode('pre_flow')->defaultNull()->end()

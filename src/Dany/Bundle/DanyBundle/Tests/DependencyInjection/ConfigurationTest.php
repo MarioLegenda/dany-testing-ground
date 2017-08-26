@@ -28,7 +28,6 @@ class ConfigurationTest extends KernelTestCase
 
         $this->assertEquals('AppBundle\Entity\Category', $categoryApp['model']);
         $this->assertEmpty($categoryApp['models']);
-        $this->assertEmpty($categoryApp['response_headers']);
         $this->assertEmpty($categoryApp['flow']);
     }
 
@@ -49,7 +48,6 @@ class ConfigurationTest extends KernelTestCase
         $categoryApp = $processedConfiguration['resources']['app.category'];
 
         $this->assertNotEmpty($categoryApp['models']);
-        $this->assertNotEmpty($categoryApp['response_headers']);
         $this->assertNotEmpty($categoryApp['listeners']);
         $this->assertNotEmpty($categoryApp['flow']);
         $this->assertNull($categoryApp['model']);
