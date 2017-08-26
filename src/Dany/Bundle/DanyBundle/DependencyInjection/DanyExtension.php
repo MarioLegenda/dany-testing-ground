@@ -22,8 +22,65 @@ class DanyExtension extends Extension
         $configuration = new Configuration();
         $config = $this->processConfiguration($configuration, $configs);
 
+        $this->validateResources($config['resources'], $container);
+
         $loader = new Loader\XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
 
         $loader->load('services.xml');
+    }
+
+    private function validateResources($resources, ContainerBuilder $container)
+    {
+        foreach ($resources as $resourceName => $resource) {
+            if (!array_key_exists('model', $resource) and
+                !array_key_exists('models', $resource))
+            {
+                throw new \RuntimeException(
+                    sprintf(
+                        'Invalid dany resource configuration. A dany resource should have one of \'model\' of \'models\' options'
+                    )
+                );
+            }
+
+            $this->validateListeners($resource, $container);
+            $this->validateFlow($resource, $container);
+        }
+    }
+
+    private function validateListeners(array $resource, ContainerBuilder $container)
+    {
+        if (array_key_exists('listeners', $resource)) {
+            $listeners = $resource['listeners'];
+
+            foreach ($listeners as $listenerType => $listener) {
+                if (!$container->has($listener)) {
+                    throw new \RuntimeException(
+                        sprintf(
+                            'Invalid dany \'%s\' listener service. \'%s\' does not exist',
+                            $listenerType,
+                            $listener
+                        )
+                    );
+                }
+            }
+        }
+    }
+
+    private function validateFlow(array $resource, ContainerBuilder $container)
+    {
+        if (array_key_exists('flow', $resource)) {
+            $flows = $resource['flow'];
+
+            foreach ($flows as $flow) {
+                if (!$container->has($flow)) {
+                    throw new \RuntimeException(
+                        sprintf(
+                            'Nonexistent dany flow service. \'%s\' does not exist',
+                            $flow
+                        )
+                    );
+                }
+            }
+        }
     }
 }

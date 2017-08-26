@@ -75,9 +75,9 @@ dany:
             #models:
              #   - AppBundle\Entity\Category
              #   - AppBundle\Entity\Menu
-            listeners:
-                pre_flow: some.listener
-                post_flow: some.listener
+#            listeners:
+#                pre_flow: some.listener
+#                post_flow: some.listener
             flow:
                 - flow.service.1
                 - flow.service.2

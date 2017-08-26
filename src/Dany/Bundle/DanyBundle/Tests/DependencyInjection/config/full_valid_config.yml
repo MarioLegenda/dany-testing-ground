@@ -5,8 +5,6 @@ dany:
             models:
                 - AppBundle\Entity\Category
                 - AppBundle\Entity\Menu
-            response_headers:
-                'SOME-HEADER': 'header-value'
             listeners:
                 pre_flow: some.listener
                 post_flow: some.listener

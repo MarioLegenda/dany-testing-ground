@@ -1,6 +1,19 @@
 app_category:
     dany:
-        path: /category
-        model: AppBundle\Entity\Category
+        dany_resource: app.category
+        path: /categories
+        request:
+            query:
+                name:
+                    type: string
+                    enforce: mandatory
+                start:
+                    type: date
+                    format: 'Y-m-d'
+                end:
+                    type: date
+                    format: 'Y-m-d'
+        response:
+            type: json
 
 
