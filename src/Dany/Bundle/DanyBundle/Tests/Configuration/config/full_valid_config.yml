@@ -5,6 +5,12 @@ dany:
             routing:
                 category_list:
                     path: /categories
+                    host: some-host.com
+                    requirements:
+                        _format: json
+                        _locale: en
+                        page: \d+
+                    methods: [POST, PATCH, PUT]
             #models:
             #    - AppBundle\Entity\Category
             #    - AppBundle\Entity\Menu
@@ -18,8 +24,8 @@ dany:
         app.word:
             model: AppBundle\Entity\Category
             routing:
-                category_list:
-                    path: /categories
+                word_list:
+                    path: /words
             listeners:
                 pre_flow: some.listener
                 post_flow: some.listener

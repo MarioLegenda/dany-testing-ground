@@ -8,18 +8,22 @@ class Route
      * @var string $path
      */
     private $path = null;
+
     /**
      * @var array|null $requirements
      */
     private $requirements = null;
+
     /**
      * @var string|null $host
      */
     private $host = null;
+
     /**
      * @var null|string $methods
      */
     private $methods = null;
+
     /**
      * Route constructor.
      * @param array $routing
@@ -36,6 +40,7 @@ class Route
     {
         return $this->path;
     }
+
     /**
      * @param mixed $path
      */
@@ -43,6 +48,15 @@ class Route
     {
         $this->path = $path;
     }
+
+    /**
+     * @return bool
+     */
+    public function hasPath() : bool
+    {
+        return is_string($this->path);
+    }
+
     /**
      * @return mixed
      */
@@ -50,6 +64,7 @@ class Route
     {
         return $this->requirements;
     }
+
     /**
      * @param mixed $requirements
      */
@@ -57,6 +72,15 @@ class Route
     {
         $this->requirements = $requirements;
     }
+
+    /**
+     * @return bool
+     */
+    public function hasRequirements() : bool
+    {
+        return is_array($this->requirements) and !empty($this->requirements);
+    }
+
     /**
      * @return mixed
      */
@@ -64,6 +88,7 @@ class Route
     {
         return $this->host;
     }
+
     /**
      * @param mixed $host
      */
@@ -71,6 +96,15 @@ class Route
     {
         $this->host = $host;
     }
+
+    /**
+     * @return bool
+     */
+    public function hasHost() : bool
+    {
+        return is_string($this->host);
+    }
+
     /**
      * @return mixed
      */
@@ -84,6 +118,14 @@ class Route
     public function setMethods($methods)
     {
         $this->methods = $methods;
+    }
+
+    /**
+     * @return bool
+     */
+    public function hasMethods() : bool
+    {
+        return is_array($this->methods) and !empty($this->methods);
     }
 
     private function parse(array $route)

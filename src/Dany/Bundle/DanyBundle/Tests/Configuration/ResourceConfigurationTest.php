@@ -61,6 +61,13 @@ class ResourceConfigurationTest extends KernelTestCase
         $this->assertTrue($routeConfig->hasRoute('category_list'));
         $this->assertInstanceOf(Route::class, $routeConfig->getRoute('category_list'));
         $this->assertInternalType('string', $routeConfig->getRoute('category_list')->getPath());
+
+        $route = $routeConfig->getRoute('category_list');
+
+        $this->assertTrue($route->hasPath());
+        $this->assertFalse($route->hasRequirements());
+        $this->assertFalse($route->hasMethods());
+        $this->assertFalse($route->hasHost());
     }
 
     public function test_resource_full_configuration()
@@ -123,5 +130,25 @@ class ResourceConfigurationTest extends KernelTestCase
                 $resource->getFlowConfiguration()->getFlowServices()
             );
         }
+
+        $categoryApp = $configurationCollection->get('app.category');
+
+        $routeConfig = $categoryApp->getRoutingConfiguration();
+
+        $this->assertInstanceOf(RoutingConfigurationInterface::class, $routeConfig);
+        $this->assertTrue($routeConfig->hasRoute('category_list'));
+        $this->assertInstanceOf(Route::class, $routeConfig->getRoute('category_list'));
+        $this->assertInternalType('string', $routeConfig->getRoute('category_list')->getPath());
+
+        $route = $routeConfig->getRoute('category_list');
+
+        $this->assertTrue($route->hasPath());
+        $this->assertTrue($route->hasRequirements());
+        $this->assertTrue($route->hasMethods());
+        $this->assertTrue($route->hasHost());
+
+        $this->assertInternalType('array', $route->getRequirements());
+        $this->assertInternalType('string', $route->getHost());
+        $this->assertInternalType('array', $route->getMethods());
     }
 }
