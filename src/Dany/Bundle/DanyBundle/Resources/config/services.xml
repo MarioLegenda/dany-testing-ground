@@ -5,6 +5,7 @@
     xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
 
     <imports>
+        <import resource="services/listener.xml" />
         <import resource="services/configuration.xml" />
         <import resource="services/controller.xml" />
         <import resource="services/routing.xml" />

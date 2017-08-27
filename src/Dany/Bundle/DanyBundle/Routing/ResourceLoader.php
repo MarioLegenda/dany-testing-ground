@@ -37,9 +37,9 @@ class ResourceLoader implements LoaderInterface
      */
     public function load($resource, $type = null)
     {
-        if (true === $this->loaded) {
+/*        if (true === $this->loaded) {
             throw new \RuntimeException('Dany route loader has already been loaded');
-        }
+        }*/
 
         $routeCollection = new RouteCollection();
 

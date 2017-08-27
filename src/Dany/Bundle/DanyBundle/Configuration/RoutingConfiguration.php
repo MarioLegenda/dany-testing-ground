@@ -8,18 +8,13 @@ use Symfony\Component\Routing\Route;
 class RoutingConfiguration extends AbstractLooseCollection implements RoutingConfigurationInterface
 {
     /**
-     * @var array[Route] $routes
-     */
-    private $routes;
-    /**
      * RoutingConfiguration constructor.
      * @param array $routing
      */
     public function __construct(array $routing)
     {
         $this->validateRouting($routing);
-
-        $this->routes = $this->createRoutes($routing);
+        $this->addRoutes($routing);
     }
 
     /**
@@ -28,7 +23,7 @@ class RoutingConfiguration extends AbstractLooseCollection implements RoutingCon
      */
     public function getRoute(string $routeName): DanyRoute
     {
-        return $this->routes[$routeName];
+        return $this->get($routeName);
     }
     /**
      * @param string $routeName
@@ -36,46 +31,20 @@ class RoutingConfiguration extends AbstractLooseCollection implements RoutingCon
      */
     public function hasRoute(string $routeName) : bool
     {
-        return array_key_exists($routeName, $this->routes);
+        return $this->has($routeName);
     }
     /**
      * @return array
      */
     public function getRoutes(): array
     {
-        return $this->routes;
+        return $this->all();
     }
 
-    private function createRoutes(array $routing) : array
+    private function addRoutes(array $routing)
     {
-        $routes = [];
-
         foreach ($routing as $routeName => $route) {
-            $routes[$routeName] = new DanyRoute($routeName, $route);
-        }
-
-        return $routes;
-    }
-
-    private function validateRouting(array $routing)
-    {
-        if (empty($routing)) {
-            throw new \RuntimeException(
-                sprintf(
-                    'Invalid dany configuration. Empty \'routing\' config'
-                )
-            );
-        }
-
-        foreach ($routing as $routeName => $routeConfig) {
-            if (!array_key_exists('path', $routeConfig)) {
-                throw new \RuntimeException(
-                    sprintf(
-                        'Invalid dany configuration. Empty \'path\' config under \'%s\'',
-                        $routeName
-                    )
-                );
-            }
+            $this->add($routeName, new DanyRoute($routeName, $route));
         }
     }
 
@@ -106,14 +75,33 @@ class RoutingConfiguration extends AbstractLooseCollection implements RoutingCon
                 $route->setCondition($danyRoute->getCondition());
             }
 
-            $danyAppName = preg_replace('#[\\-\\.]#', '_', $danyAppName);
-            $danyRouteName = preg_replace('#[\\-\\.]#', '_', $danyRoute->getName());
-
-            $routeName = sprintf('%s_%s', $danyAppName, $danyRouteName);
+            $routeName = $danyRoute->normalize($danyAppName);
 
             $routes[$routeName] = $route;
         }
 
         return $routes;
+    }
+
+    private function validateRouting(array $routing)
+    {
+        if (empty($routing)) {
+            throw new \RuntimeException(
+                sprintf(
+                    'Invalid dany configuration. Empty \'routing\' config'
+                )
+            );
+        }
+
+        foreach ($routing as $routeName => $routeConfig) {
+            if (!array_key_exists('path', $routeConfig)) {
+                throw new \RuntimeException(
+                    sprintf(
+                        'Invalid dany configuration. Empty \'path\' config under \'%s\'',
+                        $routeName
+                    )
+                );
+            }
+        }
     }
 }

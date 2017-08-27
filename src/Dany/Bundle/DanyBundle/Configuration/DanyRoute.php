@@ -180,6 +180,18 @@ class DanyRoute
         return is_array($this->methods) and !empty($this->methods);
     }
 
+    /**
+     * @param string $configAppName
+     * @return string
+     */
+    public function normalize(string $configAppName) : string
+    {
+        $danyAppName = preg_replace('#[\\-\\.]#', '_', $configAppName);
+        $danyRouteName = preg_replace('#[\\-\\.]#', '_', $this->getName());
+
+        return sprintf('%s_%s', $danyAppName, $danyRouteName);
+    }
+
     private function parse(array $route)
     {
         $this->path = $route['path'];
