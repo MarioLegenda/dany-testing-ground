@@ -5,6 +5,10 @@ namespace Dany\Bundle\DanyBundle\Configuration;
 class ResourceConfiguration implements ResourceConfigurationInterface
 {
     /**
+     * @var RoutingConfigurationInterface $routingConfiguration
+     */
+    private $routingConfiguration;
+    /**
      * @var ModelConfigurationInterface $modelConfiguration
      */
     private $modelConfiguration;
@@ -22,15 +26,18 @@ class ResourceConfiguration implements ResourceConfigurationInterface
     /**
      * ResourceConfiguration constructor.
      * @param ModelConfigurationInterface $modelConfiguration
+     * @param RoutingConfigurationInterface $routingConfiguration
      * @param ListenerConfigurationInterface $listenerConfiguration
      * @param FlowConfigurationInterface $flowConfiguration
      */
     public function __construct(
         ModelConfigurationInterface $modelConfiguration,
+        RoutingConfigurationInterface $routingConfiguration,
         ListenerConfigurationInterface $listenerConfiguration = null,
         FlowConfigurationInterface $flowConfiguration = null
     ) {
         $this->modelConfiguration = $modelConfiguration;
+        $this->routingConfiguration = $routingConfiguration;
         $this->listenerConfiguration = $listenerConfiguration;
         $this->flowConfiguration = $flowConfiguration;
     }
@@ -80,6 +87,20 @@ class ResourceConfiguration implements ResourceConfigurationInterface
     /**
      * @inheritdoc
      */
+    public function getRoutingConfiguration(): RoutingConfigurationInterface
+    {
+        if (!$this->hasRoutingConfiguration()) {
+            throw new \RuntimeException(
+                sprintf('Routing configuration request when there is none')
+            );
+        }
+
+        return $this->routingConfiguration;
+    }
+
+    /**
+     * @inheritdoc
+     */
     public function hasFlowConfiguration(): bool
     {
         return $this->flowConfiguration instanceof FlowConfigurationInterface;
@@ -99,5 +120,13 @@ class ResourceConfiguration implements ResourceConfigurationInterface
     public function hasModelConfiguration(): bool
     {
         return $this->modelConfiguration instanceof ModelConfigurationInterface;
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function hasRoutingConfiguration(): bool
+    {
+        return $this->routingConfiguration instanceof RoutingConfigurationInterface;
     }
 }

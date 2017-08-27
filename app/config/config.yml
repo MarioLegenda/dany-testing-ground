@@ -3,6 +3,8 @@ imports:
     - { resource: security.yml }
     - { resource: services.yml }
 
+    - { resource: dany/dany.yml }
+
 # Put parameters here that don't need to change on each machine where the app is deployed
 # https://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
 parameters:
@@ -67,17 +69,3 @@ swiftmailer:
     username: '%mailer_user%'
     password: '%mailer_password%'
     spool: { type: memory }
-
-dany:
-    resources:
-        app.category:
-            model: AppBundle\Entity\Category
-            #models:
-             #   - AppBundle\Entity\Category
-             #   - AppBundle\Entity\Menu
-#            listeners:
-#                pre_flow: some.listener
-#                post_flow: some.listener
-#            flow:
-#                - flow.service.1
-#                - flow.service.2

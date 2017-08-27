@@ -2,6 +2,9 @@ dany:
     resources:
         app.category:
             model: AppBundle\Entity\Category
+            routing:
+                category_list:
+                    path: /categories
             #models:
             #    - AppBundle\Entity\Category
             #    - AppBundle\Entity\Menu
@@ -14,6 +17,9 @@ dany:
 
         app.word:
             model: AppBundle\Entity\Category
+            routing:
+                category_list:
+                    path: /categories
             listeners:
                 pre_flow: some.listener
                 post_flow: some.listener

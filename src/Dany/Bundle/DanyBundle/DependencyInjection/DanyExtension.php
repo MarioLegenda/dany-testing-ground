@@ -2,9 +2,7 @@
 
 namespace Dany\Bundle\DanyBundle\DependencyInjection;
 
-use Dany\Bundle\DanyBundle\Configuration\ResourceConfigurationBuilder;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
-use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\HttpKernel\DependencyInjection\Extension;
 use Symfony\Component\DependencyInjection\Loader;
@@ -27,13 +25,12 @@ class DanyExtension extends Extension
         $this->validateResources($config['resources'], $container);
 
         $loader = new Loader\XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
-
         $loader->load('services.xml');
 
-        $this->addConfigurationToContainer($container, $config['resources']);
+        $this->addDefinitions($container, $config);
     }
 
-    private function validateResources($resources, ContainerInterface $container)
+    private function validateResources($resources, ContainerBuilder $container)
     {
         foreach ($resources as $resourceName => $resource) {
             if (empty($resource['model']) and empty($resource['models'])) {
@@ -46,12 +43,30 @@ class DanyExtension extends Extension
 
             $this->validateListeners($resource, $container);
             $this->validateFlow($resource, $container);
+            $this->validateRouting($resource, $container);
         }
     }
 
-    private function validateListeners(array $resource, ContainerInterface $container)
+    private function validateRouting($resource, ContainerBuilder $container)
     {
-        if (array_key_exists('listeners', $resource)) {
+        if (empty($resource['routing'])) {
+            throw new \RuntimeException(
+                sprintf('Invalid dany resource configuration. \'routing\' config entry missing')
+            );
+        }
+    }
+
+    private function validateListeners(array $resource, ContainerBuilder $container)
+    {
+        if (array_key_exists('listeners', $resource) and empty($resource['flow'])) {
+            throw new \RuntimeException(
+                sprintf(
+                    'Invalid dany configuration. You haven\'t specified any flow so \'pre_flow\' and \'post_flow\' listeners are redundant and will not be called'
+                )
+            );
+        }
+
+        if (array_key_exists('listeners', $resource) and !empty($resource['listeners'])) {
             $listeners = $resource['listeners'];
 
             foreach ($listeners as $listenerType => $listener) {
@@ -68,9 +83,9 @@ class DanyExtension extends Extension
         }
     }
 
-    private function validateFlow(array $resource, ContainerInterface $container)
+    private function validateFlow(array $resource, ContainerBuilder $container)
     {
-        if (array_key_exists('flow', $resource)) {
+        if (array_key_exists('flow', $resource) and !empty($resource['flow'])) {
             $flows = $resource['flow'];
 
             foreach ($flows as $flow) {
@@ -86,12 +101,9 @@ class DanyExtension extends Extension
         }
     }
 
-    private function addConfigurationToContainer(
-        ContainerInterface $container,
-        array $resources
-    ) {
-        $configFactory = new ResourceConfigurationBuilder($resources);
-
-        $container->set('dany.resource_collection', $configFactory->buildConfiguration());
+    private function addDefinitions(ContainerBuilder $container, array $config)
+    {
+        $builderDefinition = $container->getDefinition('dany.resource_configuration_builder');
+        $builderDefinition->addArgument($config['resources']);
     }
 }

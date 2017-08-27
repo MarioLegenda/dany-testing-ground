@@ -6,6 +6,8 @@ use Dany\Bundle\DanyBundle\Configuration\FlowConfigurationInterface;
 use Dany\Bundle\DanyBundle\Configuration\ListenerConfigurationInterface;
 use Dany\Bundle\DanyBundle\Configuration\ResourceConfigurationBuilder;
 use Dany\Bundle\DanyBundle\Configuration\ResourceConfigurationInterface;
+use Dany\Bundle\DanyBundle\Configuration\Route;
+use Dany\Bundle\DanyBundle\Configuration\RoutingConfigurationInterface;
 use Dany\Library\CollectionInterface;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 use Symfony\Component\Yaml\Yaml;
@@ -45,10 +47,20 @@ class ResourceConfigurationTest extends KernelTestCase
                 $resource
             );
 
+            $this->assertTrue($resource->hasRoutingConfiguration());
             $this->assertTrue($resource->hasModelConfiguration());
             $this->assertFalse($resource->hasListenerConfiguration());
             $this->assertFalse($resource->hasFlowConfiguration());
         }
+
+        $categoryApp = $configurationCollection->get('app.category');
+
+        $routeConfig = $categoryApp->getRoutingConfiguration();
+
+        $this->assertInstanceOf(RoutingConfigurationInterface::class, $routeConfig);
+        $this->assertTrue($routeConfig->hasRoute('category_list'));
+        $this->assertInstanceOf(Route::class, $routeConfig->getRoute('category_list'));
+        $this->assertInternalType('string', $routeConfig->getRoute('category_list')->getPath());
     }
 
     public function test_resource_full_configuration()

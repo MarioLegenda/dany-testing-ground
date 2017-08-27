@@ -1,0 +1,16 @@
+dany:
+    resources:
+        app.category:
+            model: AppBundle\Entity\Category
+            routing:
+                category_list:
+                    path: /categories
+            #models:
+             #   - AppBundle\Entity\Category
+             #   - AppBundle\Entity\Menu
+#            listeners:
+#                pre_flow: some.listener
+#                post_flow: some.listener
+#            flow:
+#                - flow.service.1
+#                - flow.service.2

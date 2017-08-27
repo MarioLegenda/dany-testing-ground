@@ -2,6 +2,12 @@ dany:
     resources:
         app.category:
             model: AppBundle\Entity\Category
+            routing:
+                category_list:
+                    path: /categories
 
         app.word:
             model: AppBundle\Entity\Word
+            routing:
+                category_list:
+                    path: /categories

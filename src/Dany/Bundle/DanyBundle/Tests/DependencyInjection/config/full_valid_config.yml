@@ -1,10 +1,13 @@
 dany:
     resources:
         app.category:
-            #model: AppBundle\Entity\Category
-            models:
-                - AppBundle\Entity\Category
-                - AppBundle\Entity\Menu
+            model: AppBundle\Entity\Category
+            routing:
+                category_list:
+                    path: /categories
+#            models:
+#                - AppBundle\Entity\Category
+#                - AppBundle\Entity\Menu
             listeners:
                 pre_flow: some.listener
                 post_flow: some.listener

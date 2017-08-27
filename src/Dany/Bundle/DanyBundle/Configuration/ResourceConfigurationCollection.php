@@ -2,14 +2,11 @@
 
 namespace Dany\Bundle\DanyBundle\Configuration;
 
+use Dany\Library\AbstractLooseCollection;
 use Dany\Library\CollectionInterface;
 
-class ResourceConfigurationCollection implements CollectionInterface
+class ResourceConfigurationCollection extends AbstractLooseCollection
 {
-    /**
-     * @var array $resourceConfigurations
-     */
-    private $resourceConfigurations = [];
     /**
      * @param string $type
      * @param $value
@@ -19,17 +16,7 @@ class ResourceConfigurationCollection implements CollectionInterface
     {
         $this->validate($type, $value);
 
-        $this->resourceConfigurations[$type] = $value;
-
-        return $this;
-    }
-    /**
-     * @param string $type
-     * @return bool
-     */
-    public function has(string $type): bool
-    {
-        return array_key_exists($type, $this->resourceConfigurations);
+        return parent::add($type, $value);
     }
     /**
      * @param string $type
@@ -47,21 +34,7 @@ class ResourceConfigurationCollection implements CollectionInterface
             );
         }
 
-        return $this->resourceConfigurations[$type];
-    }
-    /**
-     * @return int
-     */
-    public function count() : int
-    {
-        return count($this->resourceConfigurations);
-    }
-    /**
-     * @return \ArrayIterator
-     */
-    public function getIterator() : \ArrayIterator
-    {
-        return new \ArrayIterator($this->resourceConfigurations);
+        return parent::get($type);
     }
 
     private function validate(string $type, $value)

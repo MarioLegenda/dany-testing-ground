@@ -27,6 +27,16 @@ class Configuration implements ConfigurationInterface
                     ->prototype('array')
                         ->children()
                             ->scalarNode('model')->defaultNull()->end()
+                            ->arrayNode('routing')
+                                ->cannotBeEmpty()
+                                ->useAttributeAsKey('name')
+                                ->prototype('array')
+                                    ->cannotBeEmpty()
+                                    ->children()
+                                        ->scalarNode('path')->cannotBeEmpty()->end()
+                                    ->end()
+                                ->end()
+                            ->end()
                             ->arrayNode('models')->prototype('scalar')->defaultNull()->end()->end()
                             ->arrayNode('listeners')
                                 ->children()
@@ -41,10 +51,5 @@ class Configuration implements ConfigurationInterface
             ->end();
 
         return $treeBuilder;
-    }
-
-    private function addRootConfig($node)
-    {
-
     }
 }

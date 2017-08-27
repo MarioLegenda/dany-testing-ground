@@ -1,19 +1,21 @@
 app_category:
-    dany:
-        dany_resource: app.category
-        path: /categories
-        request:
-            query:
-                name:
-                    type: string
-                    enforce: mandatory
-                start:
-                    type: date
-                    format: 'Y-m-d'
-                end:
-                    type: date
-                    format: 'Y-m-d'
-        response:
-            type: json
+    type: dany
+    defaults:
+        dany:
+            dany_resource: app.category
+            path: /categories
+#        request:
+#            query:
+#                name:
+#                    type: string
+#                    enforce: mandatory
+#                start:
+#                    type: date
+#                    format: 'Y-m-d'
+#                end:
+#                    type: date
+#                    format: 'Y-m-d'
+#        response:
+#            type: json
 
 

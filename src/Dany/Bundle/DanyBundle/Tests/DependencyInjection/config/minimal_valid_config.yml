@@ -2,3 +2,5 @@ dany:
     resources:
         app.category:
             model: AppBundle\Entity\Category
+            routing:
+                category_list:

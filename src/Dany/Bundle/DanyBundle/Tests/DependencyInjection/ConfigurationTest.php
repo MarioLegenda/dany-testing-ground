@@ -29,6 +29,10 @@ class ConfigurationTest extends KernelTestCase
         $this->assertEquals('AppBundle\Entity\Category', $categoryApp['model']);
         $this->assertEmpty($categoryApp['models']);
         $this->assertEmpty($categoryApp['flow']);
+        $this->assertArrayNotHasKey('listeners', $categoryApp);
+
+        $this->assertArrayHasKey('routing', $categoryApp);
+        $this->assertNotEmpty($categoryApp['routing']);
     }
 
     public function test_full_configuration()
@@ -47,9 +51,10 @@ class ConfigurationTest extends KernelTestCase
 
         $categoryApp = $processedConfiguration['resources']['app.category'];
 
-        $this->assertNotEmpty($categoryApp['models']);
+        $this->assertNotEmpty($categoryApp['routing']);
+        $this->assertEmpty($categoryApp['models']);
         $this->assertNotEmpty($categoryApp['listeners']);
         $this->assertNotEmpty($categoryApp['flow']);
-        $this->assertNull($categoryApp['model']);
+        $this->assertNotEmpty($categoryApp['model']);
     }
 }

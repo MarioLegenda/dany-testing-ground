@@ -5,12 +5,14 @@
     xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
 
     <imports>
+        <import resource="services/configuration.xml" />
         <import resource="services/controller.xml" />
         <import resource="services/routing.xml" />
     </imports>
 
     <services>
-        <service id="dany.flow_machine" synthetic="true" />
-        <service id="dany.configuration_collection" synthetic="true" />
+
+        <service id="dany.flow_machine" synthetic="true"/>
+
     </services>
 </container>
