@@ -24,16 +24,13 @@ class RequestListener
     {
         $routeName = $event->getRequest()->attributes->get('_controller');
 
-        dump($routeName);
-        die();
-
         foreach ($this->configuration as $danyAppName => $config) {
             $routingConfig = $config->getRoutingConfiguration();
 
             foreach ($routingConfig as $danyRoute) {
                 if ($danyRoute->normalize($danyAppName) === $routeName) {
                     if (!$config->hasFlowConfiguration()) {
-
+                        // return response here
                     }
                 }
             }

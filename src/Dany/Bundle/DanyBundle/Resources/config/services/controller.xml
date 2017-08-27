@@ -6,10 +6,14 @@
 
     <parameters>
         <parameter key="dany.controller.flow_machine_controller.class">Dany\Bundle\DanyBundle\Controller\FlowMachineController</parameter>
+        <parameter key="dany.controller.no_flow_controller.class">Dany\Bundle\DanyBundle\Controller\NoFlowController</parameter>
     </parameters>
 
     <services>
         <service id="dany.flow_machine_controller" class="%dany.controller.flow_machine_controller.class%" public="false">
+        </service>
+
+        <service id="dany.no_flow_controller" class="%dany.controller.no_flow_controller.class%" public="false">
         </service>
     </services>
 </container>

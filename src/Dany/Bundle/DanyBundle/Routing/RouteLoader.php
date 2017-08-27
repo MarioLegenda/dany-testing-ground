@@ -11,12 +11,17 @@ use Symfony\Component\Routing\RouteCollection;
 use Symfony\Component\Config\Definition\Processor;
 use Symfony\Component\Yaml\Yaml;
 
-class ResourceLoader implements LoaderInterface
+class RouteLoader implements LoaderInterface
 {
     /**
      * @var CollectionInterface $configuration
      */
     private $configuration;
+
+    /**
+     * @var RouteBuilder $routeBuilder
+     */
+    private $routeBuilder;
 
     /**
      * @var bool $loaded
@@ -25,11 +30,16 @@ class ResourceLoader implements LoaderInterface
 
     /**
      * ResourceLoader constructor.
+     * @param RouteBuilder $routeBuilder
      * @param CollectionInterface $configuration
      */
-    public function __construct(CollectionInterface $configuration)
+    public function __construct(
+        CollectionInterface $configuration,
+        RouteBuilder $routeBuilder
+    )
     {
         $this->configuration = $configuration;
+        $this->routeBuilder = $routeBuilder;
     }
 
     /**
@@ -43,13 +53,8 @@ class ResourceLoader implements LoaderInterface
 
         $routeCollection = new RouteCollection();
 
-        foreach ($this->configuration as $danyAppName => $config) {
-            $routingConfig = $config->getRoutingConfiguration();
-
-            $routes = RoutingConfiguration::createFromDanyRoute(
-                $danyAppName,
-                $routingConfig->getRoutes()
-            );
+        foreach ($this->configuration as $resourseName => $config) {
+            $routes = $this->routeBuilder->createRoutes($config);
 
             foreach ($routes as $routeName => $route) {
                 $routeCollection->add($routeName, $route);

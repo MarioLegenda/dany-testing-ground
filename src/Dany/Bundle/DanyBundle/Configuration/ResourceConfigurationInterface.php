@@ -5,21 +5,29 @@ namespace Dany\Bundle\DanyBundle\Configuration;
 interface ResourceConfigurationInterface
 {
     /**
+     * @return string
+     */
+    public function getName() : string;
+    /**
      * @return ModelConfigurationInterface
      */
     public function getModelConfiguration() : ModelConfigurationInterface;
+
     /**
      * @return ListenerConfigurationInterface
      */
     public function getListenerConfiguration() : ListenerConfigurationInterface;
+
     /**
      * @return FlowConfigurationInterface
      */
     public function getFlowConfiguration() : FlowConfigurationInterface;
+
     /**
      * @return RoutingConfigurationInterface
      */
     public function getRoutingConfiguration() : RoutingConfigurationInterface;
+
     /**
      * @return bool
      */

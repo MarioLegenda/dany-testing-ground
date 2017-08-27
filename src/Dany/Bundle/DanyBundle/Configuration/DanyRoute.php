@@ -9,6 +9,10 @@ class DanyRoute
      */
     private $name;
     /**
+     * @var string $normalizedName
+     */
+    private $normalizedName;
+    /**
      * @var string $path
      */
     private $path = null;
@@ -16,17 +20,17 @@ class DanyRoute
     /**
      * @var array|null $requirements
      */
-    private $requirements = null;
+    private $requirements = [];
 
     /**
      * @var string|null $host
      */
-    private $host = null;
+    private $host = [];
 
     /**
      * @var null|string $methods
      */
-    private $methods = null;
+    private $methods = [];
 
     /**
      * @var null|string $condition
@@ -181,6 +185,22 @@ class DanyRoute
     }
 
     /**
+     * @return string
+     */
+    public function getNormalizedName(): string
+    {
+        return $this->normalizedName;
+    }
+
+    /**
+     * @param string $normalizedName
+     */
+    public function setNormalizedName(string $normalizedName)
+    {
+        $this->normalizedName = $normalizedName;
+    }
+
+    /**
      * @param string $configAppName
      * @return string
      */
@@ -189,7 +209,11 @@ class DanyRoute
         $danyAppName = preg_replace('#[\\-\\.]#', '_', $configAppName);
         $danyRouteName = preg_replace('#[\\-\\.]#', '_', $this->getName());
 
-        return sprintf('%s_%s', $danyAppName, $danyRouteName);
+        $normalized = sprintf('%s_%s', $danyAppName, $danyRouteName);
+
+        $this->setNormalizedName($normalized);
+
+        return $this->getNormalizedName();
     }
 
     private function parse(array $route)

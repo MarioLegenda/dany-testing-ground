@@ -5,6 +5,10 @@ namespace Dany\Bundle\DanyBundle\Configuration;
 class ResourceConfiguration implements ResourceConfigurationInterface
 {
     /**
+     * @var string $name
+     */
+    private $name;
+    /**
      * @var RoutingConfigurationInterface $routingConfiguration
      */
     private $routingConfiguration;
@@ -25,21 +29,32 @@ class ResourceConfiguration implements ResourceConfigurationInterface
 
     /**
      * ResourceConfiguration constructor.
+     * @param string $name
      * @param ModelConfigurationInterface $modelConfiguration
      * @param RoutingConfigurationInterface $routingConfiguration
      * @param ListenerConfigurationInterface $listenerConfiguration
      * @param FlowConfigurationInterface $flowConfiguration
      */
     public function __construct(
+        string $name,
         ModelConfigurationInterface $modelConfiguration,
         RoutingConfigurationInterface $routingConfiguration,
         ListenerConfigurationInterface $listenerConfiguration = null,
         FlowConfigurationInterface $flowConfiguration = null
     ) {
+        $this->name = $name;
         $this->modelConfiguration = $modelConfiguration;
         $this->routingConfiguration = $routingConfiguration;
         $this->listenerConfiguration = $listenerConfiguration;
         $this->flowConfiguration = $flowConfiguration;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getName() : string
+    {
+        return $this->name;
     }
 
     /**

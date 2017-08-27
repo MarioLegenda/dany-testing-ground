@@ -6,10 +6,14 @@
 
     <services>
 
-        <service id="Dany\Bundle\DanyBundle\Routing\ResourceLoader">
+        <service id="Dany\Bundle\DanyBundle\Routing\RouteLoader" public="false">
             <argument type="service" id="dany.resource_configuration" />
+            <argument type="service" id="dany.route_builder" />
 
             <tag name="routing.loader" />
+        </service>
+
+        <service id="dany.route_builder" class="Dany\Bundle\DanyBundle\Routing\RouteBuilder" public="false">
         </service>
 
     </services>

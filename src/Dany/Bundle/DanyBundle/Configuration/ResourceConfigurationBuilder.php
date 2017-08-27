@@ -55,6 +55,7 @@ class ResourceConfigurationBuilder
             $collection->add(
                 $resourceName,
                 new ResourceConfiguration(
+                    $resourceName,
                     $modelConfiguration,
                     $routingConfiguration,
                     $listenerConfiguration,
