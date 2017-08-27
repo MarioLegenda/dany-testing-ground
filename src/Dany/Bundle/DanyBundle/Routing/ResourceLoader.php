@@ -18,6 +18,11 @@ class ResourceLoader implements LoaderInterface
     private $configuration;
 
     /**
+     * @var bool $loaded
+     */
+    private $loaded = false;
+
+    /**
      * ResourceLoader constructor.
      * @param CollectionInterface $configuration
      */
@@ -27,10 +32,6 @@ class ResourceLoader implements LoaderInterface
     }
 
     /**
-     * @var bool $loaded
-     */
-    private $loaded = false;
-    /**
      * @inheritdoc
      */
     public function load($resource, $type = null)
@@ -39,8 +40,7 @@ class ResourceLoader implements LoaderInterface
             throw new \RuntimeException('Dany route loader has already been loaded');
         }*/
 
-        dump($this->configuration);
-        die();
+
 
         $routes = new RouteCollection();
 

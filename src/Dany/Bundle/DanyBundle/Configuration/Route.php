@@ -5,6 +5,10 @@ namespace Dany\Bundle\DanyBundle\Configuration;
 class Route
 {
     /**
+     * @var string $name
+     */
+    private $name;
+    /**
      * @var string $path
      */
     private $path = null;
@@ -26,11 +30,30 @@ class Route
 
     /**
      * Route constructor.
+     * @param string $routeName
      * @param array $routing
      */
-    public function __construct(array $routing)
+    public function __construct(string $routeName, array $routing)
     {
+        $this->name = $routeName;
+
         $this->parse($routing);
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getName()
+    {
+        return $this->name;
+    }
+
+    /**
+     * @param mixed $name
+     */
+    public function setName($name)
+    {
+        $this->name = $name;
     }
 
     /**

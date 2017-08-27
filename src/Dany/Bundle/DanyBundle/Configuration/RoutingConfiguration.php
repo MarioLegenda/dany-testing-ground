@@ -50,7 +50,7 @@ class RoutingConfiguration extends AbstractLooseCollection implements RoutingCon
         $routes = [];
 
         foreach ($routing as $routeName => $route) {
-            $routes[$routeName] = new Route($route);
+            $routes[$routeName] = new Route($routeName, $route);
         }
 
         return $routes;

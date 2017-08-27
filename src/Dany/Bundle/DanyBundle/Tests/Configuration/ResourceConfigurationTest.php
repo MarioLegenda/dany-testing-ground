@@ -64,6 +64,7 @@ class ResourceConfigurationTest extends KernelTestCase
 
         $route = $routeConfig->getRoute('category_list');
 
+        $this->assertEquals('category_list', $route->getName());
         $this->assertTrue($route->hasPath());
         $this->assertFalse($route->hasRequirements());
         $this->assertFalse($route->hasMethods());
@@ -142,6 +143,7 @@ class ResourceConfigurationTest extends KernelTestCase
 
         $route = $routeConfig->getRoute('category_list');
 
+        $this->assertEquals('category_list', $route->getName());
         $this->assertTrue($route->hasPath());
         $this->assertTrue($route->hasRequirements());
         $this->assertTrue($route->hasMethods());
