@@ -37,6 +37,7 @@ class Configuration implements ConfigurationInterface
                                         ->scalarNode('host')->end()
                                         ->arrayNode('requirements')->prototype('scalar')->end()->end()
                                         ->arrayNode('methods')->prototype('scalar')->end()->end()
+                                        ->scalarNode('condition')->end()
                                     ->end()
                                 ->end()
                             ->end()

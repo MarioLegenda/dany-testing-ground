@@ -11,6 +11,7 @@ dany:
                         _locale: en
                         page: \d+
                     methods: [POST, PATCH, PUT]
+                    condition: some-condition
             #models:
             #    - AppBundle\Entity\Category
             #    - AppBundle\Entity\Menu

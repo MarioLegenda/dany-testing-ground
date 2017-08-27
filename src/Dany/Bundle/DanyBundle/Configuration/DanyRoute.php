@@ -2,7 +2,7 @@
 
 namespace Dany\Bundle\DanyBundle\Configuration;
 
-class Route
+class DanyRoute
 {
     /**
      * @var string $name
@@ -27,6 +27,11 @@ class Route
      * @var null|string $methods
      */
     private $methods = null;
+
+    /**
+     * @var null|string $condition
+     */
+    private $condition = null;
 
     /**
      * Route constructor.
@@ -144,6 +149,30 @@ class Route
     }
 
     /**
+     * @return null|string
+     */
+    public function getCondition()
+    {
+        return $this->condition;
+    }
+
+    /**
+     * @param null|string $condition
+     */
+    public function setCondition($condition)
+    {
+        $this->condition = $condition;
+    }
+
+    /**
+     * @return bool
+     */
+    public function hasCondition() : bool
+    {
+        return is_string($this->condition);
+    }
+
+    /**
      * @return bool
      */
     public function hasMethods() : bool
@@ -165,6 +194,10 @@ class Route
 
         if (array_key_exists('methods', $route)) {
             $this->methods = $route['methods'];
+        }
+
+        if (array_key_exists('condition', $route)) {
+            $this->condition = $route['condition'];
         }
     }
 }

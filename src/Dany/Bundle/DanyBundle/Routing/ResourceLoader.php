@@ -3,6 +3,7 @@
 namespace Dany\Bundle\DanyBundle\Routing;
 
 use Dany\Bundle\DanyBundle\Configuration\ResourceConfigurationInterface;
+use Dany\Bundle\DanyBundle\Configuration\RoutingConfiguration;
 use Dany\Library\CollectionInterface;
 use Symfony\Component\Config\Loader\LoaderInterface;
 use Symfony\Component\Config\Loader\LoaderResolverInterface;
@@ -36,16 +37,26 @@ class ResourceLoader implements LoaderInterface
      */
     public function load($resource, $type = null)
     {
-/*        if (true === $this->loaded) {
+        if (true === $this->loaded) {
             throw new \RuntimeException('Dany route loader has already been loaded');
-        }*/
+        }
 
+        $routeCollection = new RouteCollection();
 
+        foreach ($this->configuration as $danyAppName => $config) {
+            $routingConfig = $config->getRoutingConfiguration();
 
-        $routes = new RouteCollection();
+            $routes = RoutingConfiguration::createFromDanyRoute(
+                $danyAppName,
+                $routingConfig->getRoutes()
+            );
 
+            foreach ($routes as $routeName => $route) {
+                $routeCollection->add($routeName, $route);
+            }
+        }
 
-        return $routes;
+        return $routeCollection;
     }
 
     /**

@@ -6,7 +6,7 @@ use Dany\Bundle\DanyBundle\Configuration\FlowConfigurationInterface;
 use Dany\Bundle\DanyBundle\Configuration\ListenerConfigurationInterface;
 use Dany\Bundle\DanyBundle\Configuration\ResourceConfigurationBuilder;
 use Dany\Bundle\DanyBundle\Configuration\ResourceConfigurationInterface;
-use Dany\Bundle\DanyBundle\Configuration\Route;
+use Dany\Bundle\DanyBundle\Configuration\DanyRoute;
 use Dany\Bundle\DanyBundle\Configuration\RoutingConfigurationInterface;
 use Dany\Library\CollectionInterface;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
@@ -59,7 +59,7 @@ class ResourceConfigurationTest extends KernelTestCase
 
         $this->assertInstanceOf(RoutingConfigurationInterface::class, $routeConfig);
         $this->assertTrue($routeConfig->hasRoute('category_list'));
-        $this->assertInstanceOf(Route::class, $routeConfig->getRoute('category_list'));
+        $this->assertInstanceOf(DanyRoute::class, $routeConfig->getRoute('category_list'));
         $this->assertInternalType('string', $routeConfig->getRoute('category_list')->getPath());
 
         $route = $routeConfig->getRoute('category_list');
@@ -69,6 +69,7 @@ class ResourceConfigurationTest extends KernelTestCase
         $this->assertFalse($route->hasRequirements());
         $this->assertFalse($route->hasMethods());
         $this->assertFalse($route->hasHost());
+        $this->assertFalse($route->hasCondition());
     }
 
     public function test_resource_full_configuration()
@@ -138,7 +139,7 @@ class ResourceConfigurationTest extends KernelTestCase
 
         $this->assertInstanceOf(RoutingConfigurationInterface::class, $routeConfig);
         $this->assertTrue($routeConfig->hasRoute('category_list'));
-        $this->assertInstanceOf(Route::class, $routeConfig->getRoute('category_list'));
+        $this->assertInstanceOf(DanyRoute::class, $routeConfig->getRoute('category_list'));
         $this->assertInternalType('string', $routeConfig->getRoute('category_list')->getPath());
 
         $route = $routeConfig->getRoute('category_list');
@@ -148,6 +149,7 @@ class ResourceConfigurationTest extends KernelTestCase
         $this->assertTrue($route->hasRequirements());
         $this->assertTrue($route->hasMethods());
         $this->assertTrue($route->hasHost());
+        $this->assertTrue($route->hasCondition());
 
         $this->assertInternalType('array', $route->getRequirements());
         $this->assertInternalType('string', $route->getHost());
