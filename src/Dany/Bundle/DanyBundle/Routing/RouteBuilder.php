@@ -63,10 +63,11 @@ class RouteBuilder
         }
 
         if (is_null($controller)) {
+            $configName = $configuration->getName();
             throw new \RuntimeException(
                 sprintf(
                     'Dany could not determine the controller for this request. Please, check your configuration for \'%s\'',
-                    $configuration->getName()
+                    $configName
                 )
             );
         }

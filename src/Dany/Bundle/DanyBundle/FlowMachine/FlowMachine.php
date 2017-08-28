@@ -32,11 +32,13 @@ class FlowMachine implements FlowMachineInterface
     {
         foreach ($flows as $flow) {
             if (!$flow instanceof FlowInterface) {
+                $service = get_class($flow);
+                $interface = FlowInterface::class;
                 throw new InvalidFlowException(
                     sprintf(
                         'Invalid flow service. Service \'%s\' has to implement %s interface',
-                        get_class($flow),
-                        FlowInterface::class
+                        $service,
+                        $interface
                     )
                 );
             }

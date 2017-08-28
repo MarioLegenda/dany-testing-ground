@@ -32,7 +32,7 @@ class ResourceConfigurationBuilder
             $flowConfiguration = null;
             $routingConfiguration = new RoutingConfiguration($resource['routing']);
 
-            // models configuration here
+            // multiple models configuration here
 
             if (array_key_exists('model', $resource)) {
                 $modelConfiguration = new ModelConfiguration($resource['model']);
