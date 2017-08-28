@@ -2,7 +2,9 @@
 
 namespace Dany\Bundle\DanyBundle\EventListener;
 
+use Dany\Bundle\DanyBundle\Configuration\ModelConfigurationInterface;
 use Dany\Bundle\DanyBundle\Configuration\ResourceSearchProviderInterface;
+use Dany\Bundle\DanyBundle\Repository\DanyEntityRepository;
 use Doctrine\Common\EventSubscriber;
 use Doctrine\ORM\Event\LoadClassMetadataEventArgs;
 use Doctrine\ORM\Events;
@@ -44,14 +46,10 @@ class DoctrineORMRepositoryClassSubscriber implements EventSubscriber
 
     private function setRepositoryClass(ClassMetadata $metadata)
     {
-        try {
-            $resourceMetadata = $this->resourceProvider->findByModelName($metadata->getName());
-        } catch (\InvalidArgumentException $exception) {
-            return;
-        }
+        $modelConfiguration = $this->resourceProvider->findByModelName($metadata->getName());
 
-        if ($resourceMetadata->hasClass('repository')) {
-            $metadata->setCustomRepositoryClass($resourceMetadata->getClass('repository'));
+        if ($modelConfiguration instanceof ModelConfigurationInterface) {
+            $metadata->setCustomRepositoryClass(DanyEntityRepository::class);
         }
     }
 }

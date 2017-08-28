@@ -11,9 +11,12 @@
             <tag name="kernel.event_listener" event="kernel.request" method="onKernelRequest"/>
         </service>
 
-        <service id="dany.doctrine.orm.repository_class_subscriber" class="Dany\Bundle\DanyBundle\EventListener\DoctrineORMRepositoryClassSubscriber">
+        <service
+                id="dany.doctrine.orm.repository_class_subscriber"
+                class="Dany\Bundle\DanyBundle\EventListener\DoctrineORMRepositoryClassSubscriber"
+                public="false">
             <argument type="service" id="dany.resource_configuration" />
-            <tag name="doctrine.event_subscriber" priority="8192" />
+            <tag name="doctrine.event_subscriber"/>
         </service>
 
     </services>

@@ -90,7 +90,7 @@ class ResourceConfiguration implements ResourceConfigurationInterface
      */
     public function getModelConfiguration(): ModelConfigurationInterface
     {
-        if (!$this->hasFlowConfiguration()) {
+        if (!$this->hasModelConfiguration()) {
             throw new \RuntimeException(
                 sprintf('Model configuration request when there is none')
             );

@@ -9,6 +9,12 @@ class ResourceSearchProvider extends ResourceConfigurationCollection implements 
      */
     public function findByModelName(string $modelNamespace)
     {
+        foreach ($this->all() as $resource) {
+            if ($resource->getModelConfiguration()->getModel() === $modelNamespace) {
+                return $resource->getModelConfiguration();
+            }
+        }
 
+        return null;
     }
 }

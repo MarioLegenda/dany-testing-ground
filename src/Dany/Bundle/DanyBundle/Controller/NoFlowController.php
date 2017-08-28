@@ -2,15 +2,29 @@
 
 namespace Dany\Bundle\DanyBundle\Controller;
 
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Dany\Bundle\DanyBundle\Configuration\ResourceSearchProviderInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
-class NoFlowController extends Controller
+class NoFlowController
 {
+    /**
+     * @var ResourceSearchProviderInterface $resourceProvider
+     */
+    private $resourceProvider;
+
+    /**
+     * NoFlowController constructor.
+     * @param ResourceSearchProviderInterface $resourceSearchProvider
+     */
+    public function __construct(
+        ResourceSearchProviderInterface $resourceSearchProvider
+    ) {
+        $this->resourceProvider = $resourceSearchProvider;
+    }
+
     public function noFlowAction(Request $request)
     {
-        $this->get('doctrine')->getRepository('AppBundle:Category');
         return new Response('response returned');
     }
 }

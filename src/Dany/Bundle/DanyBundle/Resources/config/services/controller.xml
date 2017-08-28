@@ -10,10 +10,11 @@
     </parameters>
 
     <services>
-        <service id="dany.flow_machine_controller" class="%dany.controller.flow_machine_controller.class%" public="false">
+        <service id="dany.flow_machine_controller" class="%dany.controller.flow_machine_controller.class%">
         </service>
 
-        <service id="dany.no_flow_controller" class="%dany.controller.no_flow_controller.class%" public="false">
+        <service id="dany.no_flow_controller" class="%dany.controller.no_flow_controller.class%">
+            <argument type="service" id="dany.resource_configuration" />
         </service>
     </services>
 </container>

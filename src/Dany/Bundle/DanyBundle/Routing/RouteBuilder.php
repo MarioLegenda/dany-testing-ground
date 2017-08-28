@@ -57,9 +57,9 @@ class RouteBuilder
     {
         $controller = null;
         if (!$configuration->hasFlowConfiguration()) {
-            $controller = ['_controller' => 'DanyBundle:NoFlow:noFlow'];
+            $controller = ['_controller' => 'dany.no_flow_controller:noFlowAction'];
         } else {
-            $controller = ['_controller' => 'DanyBundle:FlowMachine:flowMachine'];
+            $controller = ['_controller' => 'dany.flow_machine_controller:flowMachineAction'];
         }
 
         if (is_null($controller)) {
