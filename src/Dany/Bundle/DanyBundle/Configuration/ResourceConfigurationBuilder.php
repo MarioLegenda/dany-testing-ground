@@ -24,7 +24,7 @@ class ResourceConfigurationBuilder
      */
     public function buildConfiguration() : CollectionInterface
     {
-        $collection = new ResourceConfigurationCollection();
+        $collection = new ResourceSearchProvider();
 
         foreach ($this->config as $resourceName => $resource) {
             $modelConfiguration = null;

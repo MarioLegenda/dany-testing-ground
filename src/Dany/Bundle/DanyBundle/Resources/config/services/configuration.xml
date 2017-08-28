@@ -9,7 +9,7 @@
                  public="false">
         </service>
 
-        <service id="dany.resource_configuration" public="false">
+        <service class="Dany\Library\CollectionInterface" id="dany.resource_configuration" public="false">
             <factory service="dany.resource_configuration_builder"
                      method="buildConfiguration"/>
         </service>
