@@ -2,10 +2,10 @@
 
 namespace Dany\Bundle\DanyBundle\Configuration;
 
-use Dany\Library\AbstractLooseCollection;
+use Dany\Library\BaseLooseCollection;
 use Dany\Library\CollectionInterface;
 
-class ResourceConfigurationCollection extends AbstractLooseCollection
+class ResourceConfigurationCollection extends BaseLooseCollection
 {
     /**
      * @param string $type

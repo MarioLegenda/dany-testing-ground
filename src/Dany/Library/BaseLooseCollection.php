@@ -2,7 +2,7 @@
 
 namespace Dany\Library;
 
-abstract class AbstractLooseCollection implements CollectionInterface
+abstract class BaseLooseCollection implements CollectionInterface
 {
     /**
      * @var array $collection

@@ -2,6 +2,7 @@
 
 namespace Dany\Bundle\DanyBundle\DependencyInjection;
 
+use Dany\Bundle\DanyBundle\DependencyInjection\Definition\DefinitionFactory;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\HttpKernel\DependencyInjection\Extension;
@@ -27,7 +28,9 @@ class DanyExtension extends Extension
         $loader = new Loader\XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
         $loader->load('services.xml');
 
-        $this->addDefinitions($container, $config);
+        $definitionFactory = new DefinitionFactory($container, $config);
+
+        $definitionFactory->addDefinitions();
     }
 
     private function validateResources($resources, ContainerBuilder $container)
@@ -99,11 +102,5 @@ class DanyExtension extends Extension
                 }
             }
         }
-    }
-
-    private function addDefinitions(ContainerBuilder $container, array $config)
-    {
-        $builderDefinition = $container->getDefinition('dany.resource_configuration_builder');
-        $builderDefinition->addArgument($config['resources']);
     }
 }

@@ -2,9 +2,9 @@
 
 namespace Dany\Bundle\DanyBundle\Configuration;
 
-use Dany\Library\AbstractLooseCollection;
+use Dany\Library\BaseLooseCollection;
 
-class RoutingConfiguration extends AbstractLooseCollection implements RoutingConfigurationInterface
+class RoutingConfiguration extends BaseLooseCollection implements RoutingConfigurationInterface
 {
     /**
      * RoutingConfiguration constructor.

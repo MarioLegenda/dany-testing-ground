@@ -2,7 +2,9 @@
 
 namespace AppBundle\Entity;
 
-class Category
+use Dany\Bundle\DanyBundle\Model\DanyResource;
+
+class Category implements DanyResource
 {
     /**
      * @var int $id

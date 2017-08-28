@@ -1,20 +1,16 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: mario
- * Date: 27.08.17.
- * Time: 15:09
- */
 
 namespace AppBundle\Entity;
 
+use Dany\Bundle\DanyBundle\Model\DanyResource;
 
-class Word
+class Word implements DanyResource
 {
     /**
      * @var int $id
      */
     private $id;
+
     /**
      * @var int $name
      */

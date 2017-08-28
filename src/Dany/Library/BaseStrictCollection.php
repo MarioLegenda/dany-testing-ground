@@ -2,7 +2,7 @@
 
 namespace Dany\Library;
 
-class AbstractStrictCollection extends AbstractLooseCollection
+class BaseStrictCollection extends BaseLooseCollection
 {
     /**
      * @param string $type
