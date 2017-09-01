@@ -18,7 +18,6 @@ class ResourceConfigurationBuilder
     {
         $this->config = $config;
     }
-
     /**
      * @return CollectionInterface
      */

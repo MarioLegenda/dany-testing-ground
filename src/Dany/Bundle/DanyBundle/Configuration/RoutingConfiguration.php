@@ -15,7 +15,6 @@ class RoutingConfiguration extends BaseLooseCollection implements RoutingConfigu
         $this->validateRouting($routing);
         $this->addRoutes($routing);
     }
-
     /**
      * @inheritdoc
      */
@@ -30,7 +29,6 @@ class RoutingConfiguration extends BaseLooseCollection implements RoutingConfigu
     {
         return $this->has($routeName);
     }
-
     /**
      * @inheritdoc
      */

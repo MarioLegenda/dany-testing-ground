@@ -45,4 +45,12 @@ interface ResourceConfigurationInterface
      * @return bool
      */
     public function hasRoutingConfiguration() : bool;
+    /**
+     * @void
+     */
+    public function markAsCurrent();
+    /**
+     * @return bool
+     */
+    public function isCurrentConfig() : bool;
 }

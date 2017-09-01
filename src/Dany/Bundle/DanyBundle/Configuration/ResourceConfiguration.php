@@ -26,7 +26,10 @@ class ResourceConfiguration implements ResourceConfigurationInterface
      * @var FlowConfigurationInterface $flowConfiguration
      */
     private $flowConfiguration;
-
+    /**
+     * @var bool $isCurrent
+     */
+    private $isCurrent = false;
     /**
      * ResourceConfiguration constructor.
      * @param string $name
@@ -143,5 +146,19 @@ class ResourceConfiguration implements ResourceConfigurationInterface
     public function hasRoutingConfiguration(): bool
     {
         return $this->routingConfiguration instanceof RoutingConfigurationInterface;
+    }
+    /**
+     * @inheritdoc
+     */
+    public function markAsCurrent()
+    {
+        $this->isCurrent = true;
+    }
+    /**
+     * @return bool
+     */
+    public function isCurrentConfig(): bool
+    {
+        return $this->isCurrent;
     }
 }

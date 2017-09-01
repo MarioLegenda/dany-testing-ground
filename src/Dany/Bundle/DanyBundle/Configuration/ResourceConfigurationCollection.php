@@ -5,8 +5,12 @@ namespace Dany\Bundle\DanyBundle\Configuration;
 use Dany\Library\BaseLooseCollection;
 use Dany\Library\CollectionInterface;
 
-class ResourceConfigurationCollection extends BaseLooseCollection
+class ResourceConfigurationCollection extends BaseLooseCollection implements ResourceHolderInterface
 {
+    /**
+     * @var ResourceConfigurationInterface $currentResource
+     */
+    private $currentResource;
     /**
      * @param string $type
      * @param $value
@@ -35,6 +39,27 @@ class ResourceConfigurationCollection extends BaseLooseCollection
         }
 
         return parent::get($type);
+    }
+    /**
+     * @inheritdoc
+     */
+    public function setResource(ResourceConfigurationInterface $resource)
+    {
+        $this->currentResource = $resource;
+    }
+    /**
+     * @inheritdoc
+     */
+    public function getResource() : ResourceConfigurationInterface
+    {
+        return $this->currentResource;
+    }
+    /**
+     * @inheritdoc
+     */
+    public function hasResource() : bool
+    {
+        return $this->currentResource instanceof ResourceConfigurationInterface;
     }
 
     private function validate(string $type, $value)
