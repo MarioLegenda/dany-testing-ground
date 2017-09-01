@@ -3,24 +3,25 @@
 namespace Dany\Bundle\DanyBundle\Controller;
 
 use Dany\Bundle\DanyBundle\Configuration\ResourceSearchProviderInterface;
+use Dany\Library\CollectionInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
 class NoFlowController
 {
     /**
-     * @var ResourceSearchProviderInterface $resourceProvider
+     * @var CollectionInterface $resourceProvider
      */
-    private $resourceProvider;
+    private $resourceConfiguration;
 
     /**
      * NoFlowController constructor.
-     * @param ResourceSearchProviderInterface $resourceSearchProvider
+     * @param CollectionInterface $resourceConfiguration
      */
     public function __construct(
-        ResourceSearchProviderInterface $resourceSearchProvider
+        CollectionInterface $resourceConfiguration
     ) {
-        $this->resourceProvider = $resourceSearchProvider;
+        $this->resourceConfiguration = $resourceConfiguration;
     }
 
     public function noFlowAction(Request $request)
