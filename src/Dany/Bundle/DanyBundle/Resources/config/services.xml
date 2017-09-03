@@ -8,6 +8,8 @@
         <import resource="services/listener.xml" />
         <import resource="services/configuration.xml" />
         <import resource="services/controller.xml" />
+        <import resource="services/resolver.xml" />
+        <import resource="services/handler.xml" />
         <import resource="services/routing.xml" />
     </imports>
 

@@ -16,7 +16,6 @@ class DoctrineORMRepositoryClassSubscriber implements EventSubscriber
      * @var ResourceSearchProviderInterface $resourceCollection
      */
     private $resourceProvider;
-
     /**
      * DoctrineORMRepositoryClassSubscriber constructor.
      * @param ResourceSearchProviderInterface $resourceProvider
