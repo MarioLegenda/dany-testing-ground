@@ -13,5 +13,11 @@
             <tag name="controller.argument_value_resolver" priority="50" />
         </service>
 
+        <service id="Dany\Bundle\DanyBundle\Resolver\SerializationResolver">
+            <argument type="service" id="dany.serialization_handler" />
+
+            <tag name="controller.argument_value_resolver" priority="50" />
+        </service>
+
     </services>
 </container>

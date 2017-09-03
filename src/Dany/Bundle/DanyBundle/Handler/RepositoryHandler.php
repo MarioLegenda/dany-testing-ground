@@ -40,6 +40,6 @@ class RepositoryHandler implements RepositoryHandlerInterface
 
     public function handle() : array
     {
-        
+        return $this->repository->findAll();
     }
 }

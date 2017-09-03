@@ -4,7 +4,9 @@ namespace Dany\Bundle\DanyBundle\Controller;
 
 use Dany\Bundle\DanyBundle\Configuration\ResourceHolderInterface;
 use Dany\Bundle\DanyBundle\Handler\RepositoryHandlerInterface;
+use Dany\Bundle\DanyBundle\Handler\SerializationHandlerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -26,8 +28,15 @@ class NoFlowController extends Controller
 
     public function noFlowAction(
         Request $request,
-        RepositoryHandlerInterface $repositoryHandler
+        RepositoryHandlerInterface $repositoryHandler,
+        SerializationHandlerInterface $serializationHandler
     ) {
+        $resources = $repositoryHandler->handle();
 
+        $response = new Response();
+        $response->setContent($serializationHandler->serialize($resources));
+        $response->headers->set('CONTENT-TYPE', 'application/json');
+
+        return $response;
     }
 }
