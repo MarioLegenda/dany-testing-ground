@@ -12,6 +12,8 @@ dany:
                         page: \d+
                     methods: [POST, PATCH, PUT]
                     condition: some-condition
+            response:
+                format: json
             #models:
             #    - AppBundle\Entity\Category
             #    - AppBundle\Entity\Menu
@@ -27,6 +29,9 @@ dany:
             routing:
                 word_list:
                     path: /words
+                    methods: [GET]
+            response:
+                format: json
             listeners:
                 pre_flow: some.listener
                 post_flow: some.listener

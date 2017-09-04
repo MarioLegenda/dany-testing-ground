@@ -5,6 +5,9 @@ dany:
             routing:
                 category_list:
                     path: /categories
+                    methods: [GET]
+            response:
+                format: json
 #            models:
 #                - AppBundle\Entity\Category
 #                - AppBundle\Entity\Menu

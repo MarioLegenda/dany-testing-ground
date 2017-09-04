@@ -5,9 +5,15 @@ dany:
             routing:
                 category_list:
                     path: /categories
+                    methods: [GET]
+            response:
+                format: json
 
         app.word:
             model: AppBundle\Entity\Word
             routing:
                 category_list:
                     path: /categories
+                    methods: [GET]
+            response:
+                format: json

@@ -29,6 +29,7 @@ class ResourceConfigurationBuilder
             $modelConfiguration = null;
             $listenerConfiguration = null;
             $flowConfiguration = null;
+            $responseConfiguration = null;
             $routingConfiguration = new RoutingConfiguration($resource['routing']);
 
             // multiple models configuration here
