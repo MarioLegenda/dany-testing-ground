@@ -18,8 +18,10 @@ class SerializationHandler implements SerializationHandlerInterface
     {
         $this->serializer = $serializer;
     }
-
-    public function serialize(array $resources)
+    /**
+     * @inheritdoc
+     */
+    public function serialize(array $resources) : string
     {
         return $this->serializer->serialize($resources, 'json');
     }
