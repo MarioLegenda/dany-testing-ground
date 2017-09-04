@@ -15,7 +15,5 @@
 
     <services>
 
-        <service id="dany.flow_machine" synthetic="true"/>
-
     </services>
 </container>

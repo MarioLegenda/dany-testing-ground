@@ -6,7 +6,7 @@
     <services>
 
         <service id="Dany\Bundle\DanyBundle\Resolver\RepositoryResolver">
-            <argument type="service" id="dany.repository_handler" />
+            <argument type="service" id="dany.handler.repository_handler" />
             <argument type="service" id="dany.resource_configuration" />
             <argument type="service" id="doctrine.orm.entity_manager" />
 
@@ -14,7 +14,14 @@
         </service>
 
         <service id="Dany\Bundle\DanyBundle\Resolver\SerializationResolver">
-            <argument type="service" id="dany.serialization_handler" />
+            <argument type="service" id="dany.handler.serialization_handler" />
+
+            <tag name="controller.argument_value_resolver" priority="50" />
+        </service>
+
+        <service id="Dany\Bundle\DanyBundle\Resolver\ResponseResolver">
+            <argument type="service" id="dany.resource_configuration" />
+            <argument type="service" id="dany.handler.response_handler_factory" />
 
             <tag name="controller.argument_value_resolver" priority="50" />
         </service>

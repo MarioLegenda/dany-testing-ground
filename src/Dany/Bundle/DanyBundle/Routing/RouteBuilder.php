@@ -8,6 +8,10 @@ use Symfony\Component\Routing\Route;
 
 class RouteBuilder
 {
+    /**
+     * @param ResourceConfigurationInterface $configuration
+     * @return array
+     */
     public function createRoutes(ResourceConfigurationInterface $configuration) : array
     {
         $routingConfig = $configuration->getRoutingConfiguration();

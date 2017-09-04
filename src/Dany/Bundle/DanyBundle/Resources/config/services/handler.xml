@@ -5,11 +5,17 @@
            xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
     <services>
 
-        <service id="dany.repository_handler" class="Dany\Bundle\DanyBundle\Handler\RepositoryHandler">
+        <service id="dany.handler.repository_handler" class="Dany\Bundle\DanyBundle\Handler\RepositoryHandler">
         </service>
 
-        <service id="dany.serialization_handler" class="Dany\Bundle\DanyBundle\Handler\SerializationHandler">
+        <service id="dany.handler.serialization_handler" class="Dany\Bundle\DanyBundle\Handler\SerializationHandler">
             <argument type="service" id="jms_serializer" />
+        </service>
+
+        <service id="dany.handler.response_handler" class="Dany\Bundle\DanyBundle\Handler\ResponseHandler">
+        </service>
+
+        <service id="dany.handler.response_handler_factory" class="Dany\Bundle\DanyBundle\Handler\ResponseHandlerFactory">
         </service>
 
     </services>
