@@ -7,6 +7,7 @@ use Dany\Bundle\DanyBundle\Configuration\ListenerConfigurationInterface;
 use Dany\Bundle\DanyBundle\Configuration\ResourceConfigurationBuilder;
 use Dany\Bundle\DanyBundle\Configuration\ResourceConfigurationInterface;
 use Dany\Bundle\DanyBundle\Configuration\DanyRoute;
+use Dany\Bundle\DanyBundle\Configuration\ResponseConfigurationInterface;
 use Dany\Bundle\DanyBundle\Configuration\RoutingConfigurationInterface;
 use Dany\Library\CollectionInterface;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
@@ -70,6 +71,10 @@ class ResourceConfigurationTest extends KernelTestCase
         $this->assertTrue($route->hasMethods());
         $this->assertFalse($route->hasHost());
         $this->assertFalse($route->hasCondition());
+
+        $responseConfig = $categoryApp->getResponseConfiguration();
+
+        $this->assertInstanceOf(ResponseConfigurationInterface::class, $responseConfig);
     }
 
     public function test_resource_full_configuration()
@@ -141,6 +146,10 @@ class ResourceConfigurationTest extends KernelTestCase
         $this->assertTrue($routeConfig->hasRoute('category_list'));
         $this->assertInstanceOf(DanyRoute::class, $routeConfig->getRoute('category_list'));
         $this->assertInternalType('string', $routeConfig->getRoute('category_list')->getPath());
+
+        $responseConfig = $categoryApp->getResponseConfiguration();
+
+        $this->assertInstanceOf(ResponseConfigurationInterface::class, $responseConfig);
 
         $route = $routeConfig->getRoute('category_list');
 

@@ -27,7 +27,10 @@ interface ResourceConfigurationInterface
      * @return RoutingConfigurationInterface
      */
     public function getRoutingConfiguration() : RoutingConfigurationInterface;
-
+    /**
+     * @return ResponseConfigurationInterface
+     */
+    public function getResponseConfiguration() : ResponseConfigurationInterface;
     /**
      * @return bool
      */
@@ -45,6 +48,10 @@ interface ResourceConfigurationInterface
      * @return bool
      */
     public function hasRoutingConfiguration() : bool;
+    /**
+     * @return bool
+     */
+    public function hasResponseConfiguration() : bool;
     /**
      * @void
      */

@@ -13,10 +13,13 @@ class ResourceConfiguration implements ResourceConfigurationInterface
      */
     private $routingConfiguration;
     /**
+     * @var ResponseConfigurationInterface $responseConfiguration
+     */
+    private $responseConfiguration;
+    /**
      * @var ModelConfigurationInterface $modelConfiguration
      */
     private $modelConfiguration;
-
     /**
      * @var ListenerConfigurationInterface $listenerConfiguration
      */
@@ -35,6 +38,7 @@ class ResourceConfiguration implements ResourceConfigurationInterface
      * @param string $name
      * @param ModelConfigurationInterface $modelConfiguration
      * @param RoutingConfigurationInterface $routingConfiguration
+     * @param ResponseConfigurationInterface $responseConfiguration
      * @param ListenerConfigurationInterface $listenerConfiguration
      * @param FlowConfigurationInterface $flowConfiguration
      */
@@ -42,12 +46,14 @@ class ResourceConfiguration implements ResourceConfigurationInterface
         string $name,
         ModelConfigurationInterface $modelConfiguration,
         RoutingConfigurationInterface $routingConfiguration,
+        ResponseConfigurationInterface $responseConfiguration,
         ListenerConfigurationInterface $listenerConfiguration = null,
         FlowConfigurationInterface $flowConfiguration = null
     ) {
         $this->name = $name;
         $this->modelConfiguration = $modelConfiguration;
         $this->routingConfiguration = $routingConfiguration;
+        $this->responseConfiguration = $responseConfiguration;
         $this->listenerConfiguration = $listenerConfiguration;
         $this->flowConfiguration = $flowConfiguration;
     }
@@ -67,7 +73,7 @@ class ResourceConfiguration implements ResourceConfigurationInterface
     {
         if (!$this->hasFlowConfiguration()) {
             throw new \RuntimeException(
-                sprintf('Flow configuration request when there is none')
+                sprintf('Internal error: Flow configuration request when there is none. Please, post an issue on Github')
             );
         }
 
@@ -81,7 +87,7 @@ class ResourceConfiguration implements ResourceConfigurationInterface
     {
         if (!$this->hasFlowConfiguration()) {
             throw new \RuntimeException(
-                sprintf('Listener configuration request when there is none')
+                sprintf('Internal error: Listener configuration request when there is none. Please, post an issue on Github')
             );
         }
 
@@ -95,7 +101,7 @@ class ResourceConfiguration implements ResourceConfigurationInterface
     {
         if (!$this->hasModelConfiguration()) {
             throw new \RuntimeException(
-                sprintf('Model configuration request when there is none')
+                sprintf('Internal error: Model configuration request when there is none. Please, post an issue on Github')
             );
         }
 
@@ -109,11 +115,31 @@ class ResourceConfiguration implements ResourceConfigurationInterface
     {
         if (!$this->hasRoutingConfiguration()) {
             throw new \RuntimeException(
-                sprintf('Routing configuration request when there is none')
+                sprintf('Internal error: Routing configuration request when there is none. Please, post an issue on Github')
             );
         }
 
         return $this->routingConfiguration;
+    }
+    /**
+     * @inheritdoc
+     */
+    public function getResponseConfiguration() : ResponseConfigurationInterface
+    {
+        if (!$this->hasResponseConfiguration()) {
+            throw new \RuntimeException(
+                sprintf('Internal error: Response configuration request when there is none. Please, post an issue on Github')
+            );
+        }
+
+        return $this->responseConfiguration;
+    }
+    /**
+     * @inheritdoc
+     */
+    public function hasResponseConfiguration() : bool
+    {
+        return $this->responseConfiguration instanceof ResponseConfigurationInterface;
     }
 
     /**
