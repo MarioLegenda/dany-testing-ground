@@ -23,7 +23,13 @@ class NoFlowController
     ) {
         $this->resourceHolder = $resourceHolder;
     }
-
+    /**
+     * @param Request $request
+     * @param RepositoryHandlerInterface $repositoryHandler
+     * @param SerializationHandlerInterface $serializationHandler
+     * @param ResponseHandlerInterface $responseHandler
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
     public function noFlowAction(
         Request $request,
         RepositoryHandlerInterface $repositoryHandler,
